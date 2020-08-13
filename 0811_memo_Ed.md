@@ -34,7 +34,7 @@
   * form: 서버에 처리될 데이터를 제공하는 역할
     * input: 다양한 타입을 가지는 입력 데이터 필드.
       * 공통속성: name, placeholder, required, autofocus
-      * type: text, radio, checkbox, date, password
+      * type(종류를 나타냄): text, radio, checkbox, date, password
       * label태그 : 서식 입력요소의 캡션
 
 
@@ -89,6 +89,30 @@
 
       선택자1 + 선택자2(속성: 속성값)
 
+      ```html
+          <style>
+              /*자손선택자*/
+              article p{
+                  color: red;
+              }
+              /*직계 자손 선택자*/
+              article > p {
+                  color: blue;
+              }
+              /*형제 요소 선택자*/
+              p ~ section{
+                  color: orchid;
+              }
+              /*인접 형제 요소 선택자*/
+              section + p {
+                  color: cornflowerblue;
+              }
+          </style>
+      </head>
+      ```
+    
+      
+  
 * CSS 적용 우선순위
 
   1. ###### 중요도 `!important`로 나타냄. 사용 시 주의! 
