@@ -1,19 +1,3 @@
-* 강의 순서
-
-```
-장고설치
-
-장고pjt 생성
-
-서버켜서 로켓페이지확인
-
-장고 앱 생성-> 앱을 pjt에 등록
-
-urls -> view.py -> templates
-```
-
-
-
 * 기타
 
 ```
@@ -89,7 +73,9 @@ def 함수(request):
 
 # Django
 
-* 장고설치
+* 파이썬을 기반으로 하는 웹 백엔드 프레임워크
+
+* ##### 장고설치
 
   ```
   pip install django
@@ -98,7 +84,7 @@ def 함수(request):
   pip install django==3.3
   ```
 
-  pip list(설치확인)
+  pip list(장고 설치버전 확인)
 
   django-admin startproject first_project(프로젝트생성.디장고어드민은 처음 프로젝트만들때만 사용)
 
@@ -115,7 +101,7 @@ def 함수(request):
   * 하이픈 사용X, 파이썬이나 장고에서 기본적으로 사용되는 이름X
 
   ```
-  django-admin startproject first_webex
+  django-admin startproject first_webex(프로젝트명)
   ```
 
   * `first_webex`라는 이름으로 폴더가 생성
@@ -130,13 +116,18 @@ def 함수(request):
 
       * 가장 밖에 있는 프로젝트 폴더명은 수정가능하나, setting파일이 들어있는 폴더명은 건들지말기
 
+      * 프로젝트 생성완료하면 항상 `manage.py`가 있는 위치로 이동
+
+        `No such file`
+
   * 장고실행
 
     ```
     python manage.py runserver
+    실행하면 로켓이 보임. 단, app이 등록되면 볼 수 없다.
     ```
 
-## APP
+##   APP
 
 * 장고프로젝트 Application의 집합체로 동작
 
@@ -171,19 +162,22 @@ def 함수(request):
 
 
 
-
-
 ## MTV(MVC 패턴)
 
 * MTV(MVC 패턴)
-  * Model: 장고에서는 모델
-  * View: 템플릿
-  * Controller: 뷰
+  * Model: 장고에서는 모델. DB 관리
+  * Template (view) : 템플릿. 보여지는 페이지 관리
+  * View(Controller): 데이터를 어떻게 처리하고 관리할 지.
 * 3대장: 우리가 가장 밀접하게 수정해야하는 파일명
   1. urls.py
   2. views.py
   3. templates (html들)
-
+4.  (models.py)
+* 코드작성흐름
+  * urls.py - views.py - templates
+  * 어디에서 주소를 설정하는지 (urls)
+  * 요청이 들어오면 어떤 파일을 거치게 되는지
+  * 어디에서 새로운 페이지를 만들면 되는지(templates 폴더)
 * urls.py 해야할 일
   * __path('url패턴/', 실행이 되어야 하는 views에 있는 함수, 해당 path의 별명)__
   * 많이 놓치는 부분: url뒤에 슬러쉬!!!!!!
@@ -194,27 +188,9 @@ def 함수(request):
 * template에서 해야할 일
 
   * 폴더 명은 반드시 ```templates```인 것을 확인
-  * 
 * TemplateDoesNotExist at /index/오류 이유
   * 오타
   * templates폴더에 위치해있지않을 때.
-
-
-
-# Django Template Language(DTL)
-
-* Django Template System에서 사용하는 빌트인 템플릿 시스템.
-* 조건 반복 치환 필터 변수등의 기능을 제공
-* 프로그래밍적 로직이 아니라 프레젠테이션을 표현하기 위한 것.
-* 파이썬처럼 if, for를 사용할 수 있으나, 단순히 python code로 실행되는 것은 아니다.
-
-
-
-syntax
-
-* variable: `{{}}`
-* filter : `{{variable|filter}}`
-* tags: `{% tag %}`
 
 
 
@@ -237,11 +213,15 @@ query=헤이즈;;;;쿼리는 키(input name), 헤이즈는 밸류(input value)
 
 ## 여기부터는 본격적인 장고 동작 정의 방법
 
-* Template Variable
+* #### Template Variable
 
   * html과 같은 템플릿에서 views.py에서 준비한 변수를 가져다 쓰는 방법
 
-  * render() 세번째 인자로 `{'key':value}`와 같이 딕셔너리 형태로 넘겨주면 Template에서 key를 이용하여 value를 가져올 수 있다.
+  * render()사용할 때 views.py에서 정의한 변수를 template 파일로 넘겨서 사용하는 것
+
+  * render() 세번째 인자로 `{'key':value}`와 같이 딕셔너리 형태로 넘겨주면 Template에서 key를 이용하여 value를 가져올 수 있다.  key의 문자열이 template에서 사용가능한 변수명이 된다.
+
+  * dictionary형태로 직접 전달하는 것보다 `context`라는 변수를 사용해서 넘기는 것이 일반적임.
 
     ```
     context = {'key':value}
@@ -252,44 +232,64 @@ query=헤이즈;;;;쿼리는 키(input name), 헤이즈는 밸류(input value)
     {{key}}이렇게 value를 보여줄 수 있다.
     ```
 
-* Variable Routing(동적 라우팅)
+* #### Variable Routing(동적 라우팅)
 
   * url주소일부를 변수처럼 사용해서 동적인 주소를 만드는 것.
 
+  * URL주소 일부에 변수처럼 값을 전달하는 동적인 주소를 만드는 것.
+
+  * 왜 사용하나?
+
+    * hi john, hi jenny 와 같이 다양한 사람들과 인사를 하는 함수를 작성할 때
+  * 동적 라우팅을 쓰지않으면 `urls.py`에 일일이 등록해줘야 함
+      * 인원이 많아지거나 누구한테 인사해야할지 모를 때 고정적인 방식은 사용하기 어려움
+  * 동적라우팅을 사용하면 뒤에 사람이름을 변수화 할 수 있다.
+        * `hi <str:name>`형식으로 나타낼 수 있음
+      * views.py에서 함수를 정의할 때 인자로 꼭 variable routing에서 선언한 변수명을 받아야 함
+      * 변수로 사용할 수 있는 type의 종류
+      * 구글에서 django url dispatcher로 검색하면 확인가능
+        * 
+
     주소요청: `https://127.0.0.1:8000/hello/문자열`
-
+    
     urls.py
-
+    
     ```
     path('hello/<str(타입):name(저장되는 변수명)>/', views.hello),
     ```
-
-    views.py
-
-    ```
+    
+  views.py
+    
+  ```
     def hello(request, name): #저장되는 변수명을 def에 넣어야함.
     	print(name)
     	context = {
     		'name':name,
     	}
-    	return render(request, 'hello,html', context)
+  	return render(request, 'hello,html', context)
     ```
-
+    
     template(hello.html)
-
+    
     ```html
     <body>
         이름은:{{name}} #context의 key값을 사용하면 value를 출력한다.
     </body>
     ```
-
+    
     
 
-* DTL(tag와 filter)
+* #### DTL(tag와 filter, Django Template Language)
 
-  * 로직을 표현할 때: `{% for %}`
-
+  * django template에서 사용하는 내장 template system
+  * Django Template System에서 사용하는 빌트인 템플릿 시스템.
+  * 조건 반복 변수 치환 필터등의 기능을 제공
+  * 로직을 표현할 때: `{% tag %}`
   * 값을 표현할 때 : `{{ }}`
+  * filter: `{{variable|filter}}`
+
+  * 프로그래밍적 로직이 아니라 프레젠테이션을 표현하기 위한 것.
+  * 파이썬처럼 if, for를 사용할 수 있으나, 단순히 python code로 실행되는 것은 아니다.
 
   * 주석으로 나타내고 싶을 때 : `{# #}`or `{% comment %}`주석할 내용 `{% endcomment %}`
 
@@ -298,26 +298,29 @@ query=헤이즈;;;;쿼리는 키(input name), 헤이즈는 밸류(input value)
     {% comment %} <h1>{{ i * 2}}</h1> {% endcomment %}
     ```
 
-  * for 태그
+  * ###### for 태그
 
     * 반복을 위한 태그
 
       ```
       {% for 임시변수 in iterable한 객체 %}
       {% endfor %}
+      
+      {% for menu in menus %}
+      	<P>({ for loop.counter}) {(menu})</P>
       ```
 
     * for empty
 
       ```html
-      {% for 임시변수 in iterable한 객체 %}
+      {% for 임시변수 in 뷰에서 전달받은 iterable한 객체 %}
       	값이 하나라도 있으면 여기 실행
       {% empty %}
       	출력할 값이 없으면 출력
       {% endfor %}
       ```
 
-  * if 태그
+  * ###### if 태그
 
     * 조건을 구분하기 위한 태그
 
@@ -327,42 +330,56 @@ query=헤이즈;;;;쿼리는 키(input name), 헤이즈는 밸류(input value)
       {% else %}
       {% endif %}
       ```
+      
+      ```
+      조건연산자 사용가능
+      <= >= == != > < 
+      in
+      not in 
+      is
+      ```
 
-  * 나머지 기타 유용한 dtl문서를 참고(구글에서 키워드 django built in template 검색)
+  * __form__ 태그
 
-  * 
+    * HTML form tag의 의미
+    * 입력받은 데이터를 어딘가로 보낼 떄 사용
 
-  * __form__
-
-  * HTML form tag의 의미
-
-  * 입력받은 데이터를 어딘가로 보낼 떄 사용
-
-     ```html
+    ```html
     # action: 보내려는 목표
     # method: http method(get, post)
+    
     <form action="" method="GET">
         input 데이터를 입력받게 적절히 코딩.
         #오락실버튼
-        <input type="button">
+        <input type="button" name="데이터명">
         #미사일버튼
         <input type="submit">
         
         <button></button>
     
     </form>
-     ```
+    <input type="text"> #form태그 내부 친구들과 값이 전송되지 
+    ```
 
-  * action 에 들어가는 목표 url 설정 주의 사항
+    * action: 데이터를 보내려는 목적지 주소
 
     ```
+    # action 에 들어가는 목표 url 설정 주의 사항
     action="/catch/"
     => 127.0.0.1:8000/catch?name=asdf
     
     현재 주소 : 127.0.0.1:8000/index
     action="catch/"
-    => 
+    => 현재주소/catch/
     ```
 
-    
+    * method: http method(GET, POST)
+
+      * GET: 주소에 query string형식으로 데이터를 전달하는 방식( 정보를 조회할 때 주로 사용)
+
+        `localhost:8000/catch/?데이터명=데이터값&데이터1명=데이터1값&...`
+
+    * `request`라는 장고함수 선언할 때 넣어주었던 인자에 유저가 요청한 값이 들어있음
+
+    나머지 기타 유용한 dtl문서를 참고(구글에서 키워드 django built in template 검색)
 
