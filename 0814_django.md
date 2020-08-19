@@ -19,23 +19,23 @@ ctrl+c는 터미널에서 서버를 끄게만드는 단축키
 
 2.app 등록(settings.py에 등록)
 
-settings.py에서 
+```python
+# settings.py에서 APPS 작성 우선순위
 
-INSTALLED_APPS = [ 작성하는 순서.
+INSTALLED_APPS = [ 
 
-  *#1. local apps*
+  #1. local apps
 
   'articles',
 
-  *# 2. 3rd party apps*
+  # 2. 3rd party apps
 
-  *# 3. django apps*
+  # 3. django apps
 
 파일이름,
 
 ]      ###마지막요소에 ,를 적어준다.
-
-
+```
 
 
 
@@ -242,6 +242,7 @@ query=헤이즈;;;;쿼리는 키(input name), 헤이즈는 밸류(input value)
 
     * hi john, hi jenny 와 같이 다양한 사람들과 인사를 하는 함수를 작성할 때
   * 동적 라우팅을 쓰지않으면 `urls.py`에 일일이 등록해줘야 함
+      
       * 인원이 많아지거나 누구한테 인사해야할지 모를 때 고정적인 방식은 사용하기 어려움
   * 동적라우팅을 사용하면 뒤에 사람이름을 변수화 할 수 있다.
         * `hi <str:name>`형식으로 나타낼 수 있음
@@ -258,8 +259,9 @@ query=헤이즈;;;;쿼리는 키(input name), 헤이즈는 밸류(input value)
     path('hello/<str(타입):name(저장되는 변수명)>/', views.hello),
     ```
     
+
   views.py
-    
+
   ```
     def hello(request, name): #저장되는 변수명을 def에 넣어야함.
     	print(name)
@@ -267,16 +269,16 @@ query=헤이즈;;;;쿼리는 키(input name), 헤이즈는 밸류(input value)
     		'name':name,
     	}
   	return render(request, 'hello,html', context)
-    ```
-    
+  ```
+
     template(hello.html)
-    
+
     ```html
     <body>
         이름은:{{name}} #context의 key값을 사용하면 value를 출력한다.
     </body>
     ```
-    
+
     
 
 * #### DTL(tag와 filter, Django Template Language)
