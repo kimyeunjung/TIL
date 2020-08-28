@@ -16,8 +16,6 @@
   </html>
   ```
 
-* ![image-20200811113747656](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20200811113747656.png)
-
 * DOM tree 부모형제관계
 
 * 요소(element) : 태그와 컨텐츠로 구성.
@@ -134,6 +132,8 @@
 
 
 
+![image-20200823151409287](0811_html_e.assets/image-20200823151409287.png)
+
 * CSS 단위
 
   * px, %(기준 사이즈에서 배율), em(상속받은 사이즈에서 배수), rem(root사이즈에서 배수)
@@ -156,31 +156,41 @@
   * 수직 간의 형제요소에서 주로 발생
   * margin대신 padding을 이용하여 해결가능
 
+  ![image-20200823151909012](0811_html_e.assets/image-20200823151909012.png)
+
 * CSS Display
 
   * block
-    * div, ul, ol, li, p, hr, from
+    
+    * div, ul, ol, li, p, hr, form
+    * margin으로 정렬함
+    
   * inline
     * span, a, img, input, label, b, em, i, strong
-    * 컨텐츠의 너비만큼 공간을 차지
+    * text-align으로 정렬함
+    * 컨텐츠의 너비만큼 공간을 차지 
       * width height margin-top margin-bottom은 지정할 수 `없음`
+    
   * inline-block
     * 컨텐츠 너비만틈 공간차지
     * width height margin-top margin-bottom은 지정할 수 `있음`
+    
   * none : 공간을 없애버림.
-    * visibility: hidden은 공간은 차지하나 화면에 표시안함,
+
+  * visibility: hidden은 공간은 차지하나 화면에 표시안함,
+
+    
 
 * CSS Position
 
-  * static: 기본적인 배치순서에 따름(기본 값)
-  * relative: 자기 자신의 초반 위치를 기준으로 이동
-  * absolute: static속성이 아닌 가장 가까운 부모나 조상 요소를 기준으로 이동함.
+  * static: 기본적인 배치순서에 따름(기본 값, 좌측상단)
+  *  relative: 자기 자신의 초반위치를 기준으로 이동
+  * absolute: 스태틱속성이 아닌 가장 가까운 부모/조상요소를 기준으로 이동
     * 기본적인 배치순서에서 제외됨.
   * fixed: 부모요소와 관계없이 브라우저를 기준으로 위치
   * sticky: relative처럼 기본배치순서는 가지고 있음.
     * 화면 밖으로 벗어나면 fixed처럼 위치에 고정되어 있음
     * 부모의 영역의 화면 밖으로 벗어나면 다시 일반적인 흐름을 따름.
-    * 
 
 
 

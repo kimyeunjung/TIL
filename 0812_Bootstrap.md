@@ -3,7 +3,7 @@
 #### Float 
 
 * inline이나 텍스트요소가 이미지나 블록을 감싸도록 배치하는 기능.
-* 속성:none, right, left
+* 속성:none, right, left 
 
 ![image-20200812124616760](C:\Users\kimyeunjung\AppData\Roaming\Typora\typora-user-images\image-20200812124616760.png)
 
@@ -11,34 +11,14 @@
 
 * 레이아웃: 요소 간 공간배분과 정렬을 위한 1차원 레이아웃
 
-  * 요소
+  ![image-20200823175749618](0812_Bootstrap.assets/image-20200823175749618.png)
+
+  * __요소__
     * flex container(부모요소)
     * flex item(자식요소)
-  * 축
-    * main axis(메인축)
-    * cross axis(교차축)
-
-  ```
-  .flex-container {
-  	display: flex;  # 혹은 inline-flex
-  }
-  ```
-
-* 속성
-
-  * 배치 방향 설정: flex-direction
-    * row(왼->오)
-    * row-reverse(오->왼)
-    * column(위->아래), column-reverse(아래->위)
-  * 메인축 방향 정렬: justify-content
-  * 교차축 방향 정렬: align-items, align-content, align-self
-  * 기타: flex-wrap, flex-flow, flex-grow
-  * justify & align
-    * 메인축 정렬: justify(우유를 쌓아가는 방향)
-    * 교차축 정렬: align(우유를 쌓을 때 배치부분)
-  * content: 여러 줄, 부모요소
-  * items: 한 줄, 부모요소
-  * self: flex item개별요소. 각각의 우유를 어떤 방향으로 쌓을 건지, 자식요소. 우유한곽. 
+  * __축__
+    *  main axis(메인축)
+    * cross axis 유를 어떤 방향으로 쌓을 건지, 자식요소. 우유한곽. 
 
   ```
   justify-content:메인축 기준 여러 줄 정렬
@@ -49,6 +29,27 @@
 
   * wrap은 넘치면 밑줄로, wrap-reverse는 넘치면 윗줄로
   * nowrap은 모든 줄을 한 줄로 표시.
+
+  ```
+  justify-content:space-around;
+  justify-content:space-between;
+  justify-content:center;
+  justify-content:flex-end;
+  align-items:flex-start;
+  align-items:flex-end;
+  align-items:center;
+  align-items:baseline;
+  메인축방향정하기
+  flex-direction:row;
+  flex-direction:row-reverse;
+  flex-direction:column;
+  flex-direction:column-reverse;
+  
+  flex-wrap:wrap, nowrap, wrap-reverse
+  flex-flow:wrap과 direction을 합침
+  ```
+
+  
 
 
 
